@@ -8,25 +8,8 @@ LANG: C++11
 
 #include <conio.h>
 #include <time.h>
-#include <fstream>
-#include <iostream>
-#include <cstdio>
-#include <algorithm>
-#include <cstring>
-#include <string>
-#include <cctype>
-#include <stack>
-#include <queue>
-#include <list>
-#include <vector>
-#include <map>
-#include <sstream>
-#include <cmath>
-#include <bitset>
-#include <utility>
-#include <set>
-#include <numeric>
-#include <iomanip>
+#include <bits/stdc++.h>
+#include <windows.h>
 
 #define INT_MAX 2147483647
 #define INT_MIN -2147483647
@@ -42,6 +25,11 @@ using namespace std;
 //ifstream fin ("name.in");
 //#define cout fout
 //ofstream fout ("name.out");
+
+void SetColor(int value)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),  value);
+}
 
 struct Board
 {
@@ -239,7 +227,21 @@ struct Board
         {
             for(int j = 0; j < 7; j++)
             {
-                cout << matrix[j][i] << " ";
+                if(matrix[j][i] == 'X')
+                {
+                    SetColor(2); //Green
+                    cout << matrix[j][i] << " ";
+                }
+                else if(matrix[j][i] == 'O')
+                {
+                    SetColor(4); //Red
+                    cout << matrix[j][i] << " ";
+                }
+                else
+                {
+                    cout << matrix[j][i] << " ";
+                }
+                SetColor(7); //Default color
             }
             cout << endl;
         }
