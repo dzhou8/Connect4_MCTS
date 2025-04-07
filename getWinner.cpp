@@ -1,5 +1,6 @@
 #include "getWinner.h"
 
+// this code looks really dumb but for some reason it's measurably computationally faster
 int getWinner(char matrix[7][6]) {
         if (matrix[0][0] == 'X' and  matrix[1][0] == 'X' and  matrix[2][0] == 'X' and  matrix[3][0] == 'X'){return 1;}
         if (matrix[0][0] == 'O' and  matrix[1][0] == 'O' and  matrix[2][0] == 'O' and  matrix[3][0] == 'O'){return -1;}
