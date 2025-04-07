@@ -226,7 +226,7 @@ int main() {
            << 1 - GameAI.Current->successes / GameAI.Current->total << std::endl;
       std::cout << "Making Calculations..." << std::endl;
       double start = time(0);
-      while (time(0) - start <= 5) {
+      while (time(0) - start <= 2) {
         GameAI.runSimulations();
       }
       totalRun = GameAI.Current->total;

@@ -1,5 +1,5 @@
 #include "Board.h"
-#include "getResult.h"
+#include "getWinner.h"
 
 #include <iostream>
 #include <algorithm>
@@ -33,7 +33,7 @@ void Board::add(int input) {
         remove(possibleMoves.begin(), possibleMoves.end(), input),
         possibleMoves.end());
   }
-  Result = getResult();
+  Result = getWinner(matrix);
 }
 
 void Board::Print() {
