@@ -6,20 +6,19 @@ LANG: C++11
 // @BEGIN_OF_SOURCE_CODE
 
 #include <conio.h>
-#include <bits/stdc++.h>
 #include <time.h>
-#include <windows.h>
+#include <math.h>
+#include <iostream>
 #include "Board.h"
 
 #define LL unsigned long long
 
 #define maxTrials 5000000
 #define exploration_constant 2
-using namespace std;
 
 struct Node {
   Node* parent;
-  vector<Node*> Children;
+  std::vector<Node*> Children;
   double successes;
   int total;
   int moveHere;
@@ -197,7 +196,7 @@ struct AI {
     }
     Current = tmpPointer;
     return;
-    cout << "CANNOT ADD MOVE" << endl;
+    std::cout << "CANNOT ADD MOVE" << std::endl;
   }
 
   int getMove() {
@@ -211,10 +210,10 @@ struct AI {
 int main() {
   srand(time(NULL));
   Board Game;
-  cout << "Enter which player you would like to be (1 for first, -1 for second)"
-       << endl;
+  std::cout << "Enter which player you would like to be (1 for first, -1 for second)"
+       << std::endl;
   int inputPlayer;
-  cin >> inputPlayer;
+  std::cin >> inputPlayer;
   AI GameAI(Game, 1);
 
   double timer = 0;
@@ -223,11 +222,11 @@ int main() {
     if (Game.getMoves().size() % 2 == (inputPlayer == 1))  // COMPUTERS TURN
     {
       Game.Print();
-      cout << "Heuristic: "
-           << 1 - GameAI.Current->successes / GameAI.Current->total << endl;
-      cout << "Making Calculations..." << endl;
+      std::cout << "Heuristic: "
+           << 1 - GameAI.Current->successes / GameAI.Current->total << std::endl;
+      std::cout << "Making Calculations..." << std::endl;
       double start = time(0);
-      while (time(0) - start <= 10) {
+      while (time(0) - start <= 5) {
         GameAI.runSimulations();
       }
       totalRun = GameAI.Current->total;
@@ -246,21 +245,21 @@ int main() {
     {
       //            _getch();
       Game.Print();
-      cout << "Leaves: " << totalRun << endl;
-      cout << "Heuristic: " << GameAI.Current->successes / GameAI.Current->total
-           << endl;
+      std::cout << "Leaves: " << totalRun << std::endl;
+      std::cout << "Heuristic: " << GameAI.Current->successes / GameAI.Current->total
+           << std::endl;
       int input;
-      cout << "Enter your move: " << endl;
+      std::cout << "Enter your move: " << std::endl;
       while (true) {
         if (kbhit()) {
-          cin >> input;
+            std::cin >> input;
           break;
         }
         if (GameAI.Current->total < maxTrials) {
           GameAI.runSimulations();
         }
         if (GameAI.Current->total == maxTrials - 1) {
-          cout << "Pondering Completed." << endl;
+            std::cout << "Pondering Completed." << std::endl;
         }
       }
       Game.add(input);
@@ -268,7 +267,7 @@ int main() {
     }
   }
   Game.Print();
-  cout << "Result: " << Game.getResult() << endl;
+  std::cout << "Result: " << Game.getResult() << std::endl;
   _getch();
   return 0;
 }

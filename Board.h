@@ -15,7 +15,7 @@ public:
     void add(int input);
     void Print();
     bool notFinished();
-    const std::vector<int>& getPossibleMoves() const;
-    const std::vector<int>& getMoves() const;
+    std::vector<int>& getPossibleMoves();
+    std::vector<int>& getMoves();
     int getResult();
 };

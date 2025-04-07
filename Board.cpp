@@ -1,9 +1,8 @@
 #include "Board.h"
-
-#include <bits/stdc++.h>
-
 #include "getResult.h"
-using namespace std;
+
+#include <iostream>
+#include <algorithm>
 
 #include <windows.h>
 void SetColor(int value) {
@@ -40,40 +39,40 @@ void Board::add(int input) {
 void Board::Print() {
   system("cls");
   for (int i = 0; i < 13; i++) {
-    cout << "-";
+    std::cout << "-";
   }
-  cout << endl;
+  std::cout << std::endl;
   for (int i = 5; i >= 0; i--) {
     for (int j = 0; j < 7; j++) {
       if (matrix[j][i] == 'X') {
         SetColor(2);  // Green
-        cout << matrix[j][i] << " ";
+        std::cout << matrix[j][i] << " ";
       } else if (matrix[j][i] == 'O') {
         SetColor(4);  // Red
-        cout << matrix[j][i] << " ";
+        std::cout << matrix[j][i] << " ";
       } else {
-        cout << matrix[j][i] << " ";
+        std::cout << matrix[j][i] << " ";
       }
       SetColor(7);  // Default color
     }
-    cout << endl;
+    std::cout << std::endl;
   }
   for (int i = 0; i < 13; i++) {
-    cout << "-";
+    std::cout << "-";
   }
-  cout << endl;
+  std::cout << std::endl;
   for (int i = 0; i < 7; i++) {
-    cout << i << " ";
+    std::cout << i << " ";
   }
-  cout << endl << endl;
+  std::cout << std::endl << std::endl;
   if (moves.size() > 0) {
-    cout << "Last Move: " << moves[moves.size() - 1] << endl;
+    std::cout << "Last Move: " << moves[moves.size() - 1] << std::endl;
   }
-  cout << "Possible Moves: ";
+  std::cout << "Possible Moves: ";
   for (int i = 0; i < possibleMoves.size(); i++) {
-    cout << possibleMoves[i] << " ";
+    std::cout << possibleMoves[i] << " ";
   }
-  cout << endl;
+  std::cout << std::endl;
 }
 
 bool Board::notFinished() {
@@ -85,8 +84,8 @@ bool Board::notFinished() {
   return true;
 }
 
-const vector<int>& Board::getPossibleMoves() const { return possibleMoves; }
+std::vector<int>& Board::getPossibleMoves() { return possibleMoves; }
 
-const vector<int>& Board::getMoves() const { return moves; }
+std::vector<int>& Board::getMoves() { return moves; }
 
 int Board::getResult() { return Result; }
