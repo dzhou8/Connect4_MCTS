@@ -5,19 +5,17 @@ LANG: C++11
 
 // @BEGIN_OF_SOURCE_CODE
 
+#include <conio.h>
 #include <bits/stdc++.h>
 #include <time.h>
 #include <windows.h>
+#include "Board.h"
 
 #define LL unsigned long long
 
 #define maxTrials 5000000
 #define exploration_constant 2
 using namespace std;
-
-void SetColor(int value) {
-  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), value);
-}
 
 struct Node {
   Node* parent;
@@ -58,9 +56,9 @@ struct Node {
   void makeChildren(Board input) {
     madeChildren = true;
     //        cout << "THIS: " << this << endl;
-    for (int i = 0; i < input.possibleMoves.size(); i++) {
+    for (int i = 0; i < input.getPossibleMoves().size(); i++) {
       Node* tmpNode = new Node();
-      tmpNode->init(this, input.possibleMoves[i]);
+      tmpNode->init(this, input.getPossibleMoves()[i]);
       Children.push_back(tmpNode);
       //            cout << "PARENT OF CHILD: " << Children[i]->parent << endl;
       //            cout << "CHILD: " << &Children[i] << endl;
@@ -138,11 +136,11 @@ struct Node {
 };
 
 int MonteCarlo(Board input) {
-  while (input.possibleMoves.size() > 0 && input.Result == 0) {
-    int randomIndex = rand() % input.possibleMoves.size();
-    input.add(input.possibleMoves[randomIndex]);
+  while (input.getPossibleMoves().size() > 0 && input.getResult() == 0) {
+    int randomIndex = rand() % input.getPossibleMoves().size();
+    input.add(input.getPossibleMoves()[randomIndex]);
   }
-  return input.Result;
+  return input.getResult();
 }
 
 struct AI {
@@ -172,7 +170,7 @@ struct AI {
       Current->makeChildren(Simulated);
     }
     //        cout << "MADECHILDREN: " << Current->madeChildren << endl;
-    int result = Simulated.Result;
+    int result = Simulated.getResult();
     if (result == 0) {
       result = MonteCarlo(Simulated);
     }
@@ -221,8 +219,8 @@ int main() {
 
   double timer = 0;
   int totalRun = 0;
-  while (Game.Result == 0) {
-    if (Game.moves.size() % 2 == (inputPlayer == 1))  // COMPUTERS TURN
+  while (Game.getResult() == 0) {
+    if (Game.getMoves().size() % 2 == (inputPlayer == 1))  // COMPUTERS TURN
     {
       Game.Print();
       cout << "Heuristic: "
@@ -270,7 +268,7 @@ int main() {
     }
   }
   Game.Print();
-  cout << "Result: " << Game.Result << endl;
+  cout << "Result: " << Game.getResult() << endl;
   _getch();
   return 0;
 }
