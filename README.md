@@ -36,7 +36,15 @@ g++ main.cpp Board.cpp getWinner.cpp -o connect4
 
 Then run the file
 ```bash
+
 ./connect4
 ```
 You will be promted to choose whether to play first or second. Use numbers 0-6 to place pieces in columns.
+
+## Future Work
+
+- Clean up and refactor code
+- Add a way to measure relative bot strength
+- Experiment with self-play and reinforcement learning
+- Build a simple clickable GUI or web version
 
